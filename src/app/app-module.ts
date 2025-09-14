@@ -3,15 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
+import { Todolist } from './todolist/todolist';
 
 @NgModule({
   declarations: [
-    App
+    App,
+   
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
-  ],
+    AppRoutingModule,
+    Todolist
+],
   providers: [
     provideBrowserGlobalErrorListeners()
   ],

@@ -1,0 +1,50 @@
+<div class="container">
+    
+<h1>To_Do_List</h1>
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+  <div class="mb-3">
+    <label for="task" class="form-label">Task to complete</label>
+    <input type="text" ngModel name="newTask" placeholder="Enter your task here" class="form-control" id="task" aria-describedby="task" required>
+    <div *ngIf="myForm.invalid && myForm.dirty" id="errorMessage" class="form-text">Required Field</div>
+  </div>
+  
+  <button type="submit" class="btn btn-primary "[disabled]="myForm.invalid">Submit</button>
+</form>
+<hr>
+
+
+<table class="table">
+  <thead>
+    <tr>
+     
+      <th scope="col">Taskk</th>
+      <th scope="col">Completed</th>
+      <th scope="col">Edit</th>
+       <th scope="col">Save</th>
+        <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+@for(item of taskArray; track item; let idx=$index){
+     <tr >
+    
+      <td ><input #taskinput type="text" value="{{item.taskName}}" class="form-control" [readOnly]="item.isReadOnly" [ngClass]="{'edit':!item.isReadOnly,'noedit':item.isReadOnly,'crossed':item.isCompleted}"></td>
+      <td> <input type="checkbox" [checked]="item.isCompleted" (change)="onCheck(idx)" class="form-check-input" id="checkbox"></td>
+      <td><button class="btn btn-warning btn-sm action"(click)="onEdit(idx)"[disabled]="!item.isReadOnly">Edit</button></td>
+      <td><button class="btn btn-info btn-sm action" (click)="onSave(idx,taskinput.value) "[disabled]="item.isReadOnly">Save</button></td>
+      <td><button class="btn btn-danger btn-sm action" (click)="onDelete(idx)">Delete</button></td>
+
+}@empty {
+    <p>There are no tasks</p>
+}
+
+   
+   
+  </tbody>
+</table>
+<p>Task Count:{{count()}}</p>
+
+</div>
+
+
+
